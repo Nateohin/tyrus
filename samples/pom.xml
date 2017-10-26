@@ -67,7 +67,6 @@
         <module>simplelife</module>
         <module>btc-xchange</module>
         <module>shared-collection</module>
-        <!--<module>trading</module>-->
     </modules>
 
     <profiles>
