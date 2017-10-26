@@ -398,6 +398,7 @@
                         <excludePackageNames>
                             *.core.l10n.*:*.internal.*:org.glassfish.tyrus.core.wsadl.model
                         </excludePackageNames>
+                        <additionalJOption>--allow-script-in-comments</additionalJOption>
                     </configuration>
                     <executions>
                         <execution>
