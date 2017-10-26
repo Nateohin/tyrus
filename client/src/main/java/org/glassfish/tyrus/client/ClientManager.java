@@ -134,7 +134,7 @@ public class ClientManager extends BaseContainer implements WebSocketContainer {
      * <pre>
      *     final HashMap&lt;String, String&gt; proxyHeaders = new HashMap&lt;String, String&gt;();
      *     proxyHeaders.put("Proxy-Authorization", "Basic " +
-     *         Base64Utils.encodeToString("username:password".getBytes(Charset.forName("UTF-8")), false));
+     *         Base64.getEncoder().encodeToString("username:password".getBytes(Charset.forName("UTF-8"))));
      *
      *     client.getProperties().put(GrizzlyClientSocket.PROXY_HEADERS, proxyHeaders);
      *     client.connectToServer(...);

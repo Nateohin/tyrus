@@ -44,6 +44,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +59,6 @@ import javax.websocket.Session;
 import javax.websocket.server.HandshakeRequest;
 
 import org.glassfish.tyrus.client.auth.Credentials;
-import org.glassfish.tyrus.core.Base64Utils;
 import org.glassfish.tyrus.core.DebugContext;
 import org.glassfish.tyrus.core.HandshakeException;
 import org.glassfish.tyrus.core.TyrusEndpointWrapper;
@@ -541,10 +541,8 @@ public class TyrusClientEngineTest {
                 throw new HandshakeException(LocalizationMessages.SEC_KEY_INVALID_LENGTH(digest.length));
             }
 
-            return Base64Utils.encodeToString(digest, false);
-        } catch (NoSuchAlgorithmException e) {
-            throw new HandshakeException(e.getMessage());
-        } catch (UnsupportedEncodingException e) {
+            return Base64.getEncoder().encodeToString(digest);
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             throw new HandshakeException(e.getMessage());
         }
     }

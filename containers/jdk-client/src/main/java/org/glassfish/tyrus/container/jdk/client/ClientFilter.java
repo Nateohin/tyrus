@@ -44,6 +44,7 @@ import java.net.SocketAddress;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +59,6 @@ import javax.websocket.DeploymentException;
 
 import org.glassfish.tyrus.client.ClientManager;
 import org.glassfish.tyrus.client.ClientProperties;
-import org.glassfish.tyrus.core.Base64Utils;
 import org.glassfish.tyrus.core.CloseReasons;
 import org.glassfish.tyrus.core.TyrusUpgradeResponse;
 import org.glassfish.tyrus.core.Utils;
@@ -384,8 +384,8 @@ class ClientFilter extends Filter {
             if (wlsProxyUsername != null && wlsProxyPassword != null) {
                 proxyHeaders = new HashMap<>();
                 proxyHeaders.put("Proxy-Authorization", "Basic "
-                        + Base64Utils.encodeToString(
-                        (wlsProxyUsername + ":" + wlsProxyPassword).getBytes(Charset.forName("UTF-8")), false));
+                        + Base64.getEncoder().encodeToString(
+                        (wlsProxyUsername + ":" + wlsProxyPassword).getBytes(Charset.forName("UTF-8"))));
             }
         } else {
             boolean proxyAuthPresent = false;
@@ -398,8 +398,8 @@ class ClientFilter extends Filter {
             // if (proxyAuthPresent == true) then do nothing, proxy authorization header is already added.
             if (!proxyAuthPresent && wlsProxyUsername != null && wlsProxyPassword != null) {
                 proxyHeaders.put("Proxy-Authorization", "Basic "
-                        + Base64Utils.encodeToString(
-                        (wlsProxyUsername + ":" + wlsProxyPassword).getBytes(Charset.forName("UTF-8")), false));
+                        + Base64.getEncoder().encodeToString(
+                        (wlsProxyUsername + ":" + wlsProxyPassword).getBytes(Charset.forName("UTF-8"))));
             }
         }
         return proxyHeaders;

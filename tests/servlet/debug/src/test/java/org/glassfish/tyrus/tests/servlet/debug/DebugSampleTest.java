@@ -46,6 +46,7 @@ import java.net.URI;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -69,7 +70,6 @@ import javax.websocket.server.ServerEndpoint;
 import org.glassfish.tyrus.client.ClientManager;
 import org.glassfish.tyrus.client.ClientProperties;
 import org.glassfish.tyrus.client.auth.Credentials;
-import org.glassfish.tyrus.core.Base64Utils;
 import org.glassfish.tyrus.core.TyrusWebSocketEngine;
 import org.glassfish.tyrus.server.Server;
 import org.glassfish.tyrus.spi.UpgradeRequest;
@@ -443,7 +443,7 @@ public class DebugSampleTest extends TestContainer {
                                 instance = MessageDigest.getInstance("SHA-1");
                                 instance.update(key.getBytes("UTF-8"));
                                 final byte[] digest = instance.digest();
-                                String responseKey = Base64Utils.encodeToString(digest, false);
+                                String responseKey = Base64.getEncoder().encodeToString(digest);
 
                                 response.addHeader(HandshakeResponse.SEC_WEBSOCKET_ACCEPT, responseKey);
                             } catch (Exception e) {
